@@ -21,7 +21,9 @@ Lcd_PortType ports[] = {
 
 Lcd_PinType pins[] = {D0_Pin, D1_Pin, D2_Pin, D3_Pin, D4_Pin, D5_Pin, D6_Pin, D7_Pin};
 
-Lcd_HandleTypeDef lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_8_BIT_MODE);
+Lcd_HandleTypeDef lcd;
+
+lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_8_BIT_MODE);
 
 Lcd_string(&lcd, "4ilo - 8bit");
 
@@ -37,7 +39,9 @@ Lcd_PortType ports[] = {
 
 Lcd_PinType pins[] = {D4_Pin, D5_Pin, D6_Pin, D7_Pin};
 
-Lcd_HandleTypeDef lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_4_BIT_MODE);
+Lcd_HandleTypeDef lcd;
+
+lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_4_BIT_MODE);
 
 Lcd_string(&lcd, "4ilo - 4bit");
 
