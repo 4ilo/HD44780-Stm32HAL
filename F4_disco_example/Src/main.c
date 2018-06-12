@@ -63,8 +63,6 @@ static void MX_GPIO_Init(void);
 
 /* USER CODE BEGIN 0 */
 
-
-
 /* USER CODE END 0 */
 
 /**
@@ -98,11 +96,18 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-  lcd_init();
-  lcd_string("4ilo");
+  Lcd_PortType ports[] = {
+		  D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
+  };
 
-  lcd_pos(1,6);
-  lcd_int(-500);
+  Lcd_PinType pins[] = {D4_Pin, D5_Pin, D6_Pin, D7_Pin};
+
+  Lcd_HandleTypeDef lcd = Lcd_create(ports, pins, RS_GPIO_Port, RS_Pin, EN_GPIO_Port, EN_Pin, LCD_4_BIT_MODE);
+
+  Lcd_string(&lcd, "4ilo");
+
+  Lcd_cursor(&lcd, 1,6);
+  Lcd_int(&lcd, -500);
 
   /* USER CODE END 2 */
 
@@ -198,7 +203,8 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, RS_Pin|EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, D4_Pin|D5_Pin|D6_Pin|D7_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, D4_Pin|D5_Pin|D6_Pin|D7_Pin 
+                          |D0_Pin|D1_Pin|D2_Pin|D3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : RS_Pin EN_Pin */
   GPIO_InitStruct.Pin = RS_Pin|EN_Pin;
@@ -207,8 +213,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : D4_Pin D5_Pin D6_Pin D7_Pin */
-  GPIO_InitStruct.Pin = D4_Pin|D5_Pin|D6_Pin|D7_Pin;
+  /*Configure GPIO pins : D4_Pin D5_Pin D6_Pin D7_Pin 
+                           D0_Pin D1_Pin D2_Pin D3_Pin */
+  GPIO_InitStruct.Pin = D4_Pin|D5_Pin|D6_Pin|D7_Pin 
+                          |D0_Pin|D1_Pin|D2_Pin|D3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

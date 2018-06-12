@@ -61,6 +61,14 @@
 #define D6_GPIO_Port GPIOD
 #define D7_Pin GPIO_PIN_3
 #define D7_GPIO_Port GPIOD
+#define D0_Pin GPIO_PIN_4
+#define D0_GPIO_Port GPIOD
+#define D1_Pin GPIO_PIN_5
+#define D1_GPIO_Port GPIOD
+#define D2_Pin GPIO_PIN_6
+#define D2_GPIO_Port GPIOD
+#define D3_Pin GPIO_PIN_7
+#define D3_GPIO_Port GPIOD
 
 /* ########################## Assert Selection ############################## */
 /**

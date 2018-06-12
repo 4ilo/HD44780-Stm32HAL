@@ -9,18 +9,8 @@
 #define LCD_H_
 
 #include "stm32f4xx_hal.h"
-#include "main.h"
 #include "string.h"
-
-/************************************** LCD pinout **************************************/
-#define RS_PORT 	RS_GPIO_Port
-#define RS_PIN 		RS_Pin
-
-#define EN_PORT 	EN_GPIO_Port
-#define EN_PIN 		EN_Pin
-
-#define DATA_PORTS	D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
-#define DATA_PINS 	D4_Pin, D5_Pin, D6_Pin, D7_Pin
+#include "main.h"
 
 
 /************************************** Command register **************************************/
@@ -51,17 +41,50 @@
 
 /************************************** Helper macros **************************************/
 #define DELAY(X) HAL_Delay(X)
-#define WRITE(X,Y,Z) HAL_GPIO_WritePin(X, Y, Z);
 
-#define DATA() HAL_GPIO_WritePin(RS_PORT, RS_PIN, 1)
-#define COMMAND() WRITE(RS_PORT, RS_PIN, 0)
-#define CLOCK() WRITE(EN_GPIO_Port, EN_Pin, 1); DELAY(1); WRITE(EN_GPIO_Port, EN_Pin, 0)
+
+/************************************** LCD defines **************************************/
+#define LCD_NIB 4
+#define LCD_BYTE 8
+#define LCD_DATA_REG 1
+#define LCD_COMMAND_REG 0
+
+
+/************************************** LCD typedefs **************************************/
+#define Lcd_PortType GPIO_TypeDef*
+#define Lcd_PinType uint8_t
+
+typedef enum {
+	LCD_4_BIT_MODE,
+	LCD_8_BIT_MODE
+} Lcd_ModeTypeDef;
+
+
+typedef struct {
+	Lcd_PortType * data_port;
+	Lcd_PinType * data_pin;
+
+	Lcd_PortType rs_port;
+	Lcd_PinType rs_pin;
+
+	Lcd_PortType en_port;
+	Lcd_PinType en_pin;
+
+	Lcd_ModeTypeDef mode;
+
+} Lcd_HandleTypeDef;
 
 
 /************************************** Public functions **************************************/
-void lcd_init(void);
-void lcd_int(int number);
-void lcd_string(char * string);
-void lcd_pos(uint8_t row, uint8_t col);
+void Lcd_init(Lcd_HandleTypeDef * lcd);
+void Lcd_int(Lcd_HandleTypeDef * lcd, int number);
+void Lcd_string(Lcd_HandleTypeDef * lcd, char * string);
+void Lcd_cursor(Lcd_HandleTypeDef * lcd, uint8_t row, uint8_t col);
+Lcd_HandleTypeDef Lcd_create(
+		Lcd_PortType port[], Lcd_PinType pin[],
+		Lcd_PortType rs_port, Lcd_PinType rs_pin,
+		Lcd_PortType en_port, Lcd_PinType en_pin, Lcd_ModeTypeDef mode);
+
+
 
 #endif /* LCD_H_ */
