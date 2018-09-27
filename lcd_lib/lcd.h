@@ -52,7 +52,7 @@
 
 /************************************** LCD typedefs **************************************/
 #define Lcd_PortType GPIO_TypeDef*
-#define Lcd_PinType uint8_t
+#define Lcd_PinType uint16_t
 
 typedef enum {
 	LCD_4_BIT_MODE,
