@@ -10,10 +10,12 @@ Features:
 - String printing
 - Number printing
 - Set cursor position
-
+- Clear screen
 
 ## 8bit example
 ```c
+#define LCD16xN // For 16xN screens
+
 Lcd_PortType ports[] = {
 	D0_GPIO_Port, D1_GPIO_Port, D2_GPIO_Port, D3_GPIO_Port,
 	D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
@@ -33,6 +35,8 @@ Lcd_int(&lcd, -500);
 
 ## 4bit example
 ```c
+#define LCD20xN // For 20xN screens
+
 Lcd_PortType ports[] = {
 	D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
 };
