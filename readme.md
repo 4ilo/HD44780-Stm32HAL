@@ -12,10 +12,16 @@ Features:
 - Set cursor position
 - Clear screen
 
+## Using 16xN and 20xN screens
+Set macros for different screen sizes in `lcd.h`. By default, 16xN is enabled. 
+
+```c
+// #define LCD20xN 		// For 20xN LCDs
+#define LCD16xN			// For 16xN LCDs
+```
+
 ## 8bit example
 ```c
-#define LCD16xN // For 16xN screens
-
 Lcd_PortType ports[] = {
 	D0_GPIO_Port, D1_GPIO_Port, D2_GPIO_Port, D3_GPIO_Port,
 	D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
@@ -35,8 +41,6 @@ Lcd_int(&lcd, -500);
 
 ## 4bit example
 ```c
-#define LCD20xN // For 20xN screens
-
 Lcd_PortType ports[] = {
 	D4_GPIO_Port, D5_GPIO_Port, D6_GPIO_Port, D7_GPIO_Port
 };
