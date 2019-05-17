@@ -10,7 +10,15 @@ Features:
 - String printing
 - Number printing
 - Set cursor position
+- Clear screen
 
+## Using 16xN and 20xN screens
+Set macros for different screen sizes in `lcd.h`. By default, 16xN is enabled. 
+
+```c
+// #define LCD20xN 		// For 20xN LCDs
+#define LCD16xN			// For 16xN LCDs
+```
 
 ## 8bit example
 ```c

@@ -12,6 +12,12 @@
 #include "string.h"
 #include "main.h"
 
+// #define LCD20xN 		// For 20xN LCDs
+#define LCD16xN			// For 16xN LCDs
+
+// For row start addresses
+extern const uint8_t ROW_16[];
+extern const uint8_t ROW_20[];
 
 /************************************** Command register **************************************/
 #define CLEAR_DISPLAY 0x01
