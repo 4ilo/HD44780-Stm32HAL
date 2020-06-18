@@ -6,7 +6,6 @@
  */
 
 #include "lcd.h"
-
 const uint8_t ROW_16[] = {0x00, 0x40, 0x10, 0x50};
 const uint8_t ROW_20[] = {0x00, 0x40, 0x14, 0x54};
 /************************************** Static declarations **************************************/
@@ -105,6 +104,14 @@ void Lcd_cursor(Lcd_HandleTypeDef * lcd, uint8_t row, uint8_t col)
  */
 void Lcd_clear(Lcd_HandleTypeDef * lcd) {
 	lcd_write_command(lcd, CLEAR_DISPLAY);
+}
+
+void Lcd_define_char(Lcd_HandleTypeDef * lcd, uint8_t code, uint8_t bitmap[]){
+	lcd_write_command(lcd, SETCGRAM_ADDR + (code << 3));
+	for(uint8_t i=0;i<8;++i){
+		lcd_write_data(lcd, bitmap[i]);
+	}
+
 }
 
 

@@ -8,8 +8,9 @@
 #ifndef LCD_H_
 #define LCD_H_
 
-#include "stm32f4xx_hal.h"
+#include "stm32f1xx_hal.h"
 #include "string.h"
+#include "stdio.h"
 #include "main.h"
 
 // #define LCD20xN 		// For 20xN LCDs
@@ -41,7 +42,7 @@ extern const uint8_t ROW_20[];
 #define OPT_DL 0x10						// Set interface data length
 #define OPT_N 0x08						// Set number of display lines
 #define OPT_F 0x04						// Set alternate font
-
+#define SETCGRAM_ADDR 0x040
 #define SET_DDRAM_ADDR 0x80				// Set DDRAM address
 
 
@@ -90,7 +91,7 @@ Lcd_HandleTypeDef Lcd_create(
 		Lcd_PortType port[], Lcd_PinType pin[],
 		Lcd_PortType rs_port, Lcd_PinType rs_pin,
 		Lcd_PortType en_port, Lcd_PinType en_pin, Lcd_ModeTypeDef mode);
-
-
+void Lcd_define_char(Lcd_HandleTypeDef * lcd, uint8_t code, uint8_t bitmap[]);
+void Lcd_clear(Lcd_HandleTypeDef * lcd);
 
 #endif /* LCD_H_ */
